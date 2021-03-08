@@ -22,7 +22,13 @@ spec:
         - name: config
           mountPath: /config/config.yaml
           subPath: clair-config.yml
+        - name: rootca
+          mountPath: /etc/ssl/certs/registry.crt
+          subPath: ca.crt
       volumes:
       - name: config
         configMap:
           name: clair-config
+      - name: rootca
+        secret:
+          secretName: registry-ca
