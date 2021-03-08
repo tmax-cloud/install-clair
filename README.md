@@ -27,11 +27,18 @@
 
 ## clair 설치 가이드
    
-1. 작업 디렉터리에 Clair 설치 git clone
+1. Clair 설치 git repo clone
 
     ```bash
     git clone https://github.com/tmax-cloud/install_clair
-    cd install_clair && make deploy
+    ```
+
+2. 설정 및 설치
+
+    ```bash
+    cd install_clair
+    kubectl config set-context --current --namespace=<to_install_namespace>
+    make deploy
     ```
 
 ## clair 삭제 가이드
