@@ -2,7 +2,7 @@ deployment.yml:
 	kubectl kustomize . > deployment.yml
 
 
-deploy: dev.yml
+deploy: deployment.yml
 	kubectl create -f deployment.yml
 
 clean:
