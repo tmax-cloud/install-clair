@@ -2,7 +2,7 @@
 
 ## Prerequisite
 
-* [registry-operator 설치가이드 Prerequisite](https://github.com/tmax-cloud/install-registry-operator/tree/5.0#Step-1-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%83%9D%EC%84%B1)로 생성된 인증서 및 키(ca.crt, ca.key)
+* [registry-operator 설치가이드 - Step01 인증서 생성](https://github.com/tmax-cloud/install-registry-operator/tree/5.0#Step-1-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%83%9D%EC%84%B1) 과정으로 생성된 인증서 및 키(ca.crt, ca.key)
 
 
 ## 폐쇄망 구축
