@@ -1,14 +1,10 @@
-
-dev.yml:
-	@echo "====== Create $@ ======="
-	kubectl kustomize . > dev.yml
+deployment.yml:
+	kubectl kustomize . > deployment.yml
 
 
-dev: dev.yml
-	@echo "====== Run target: $@ ======="
-	kubectl create -n registry-system -f dev.yml
+deploy: dev.yml
+	kubectl create -f deployment.yml
 
 clean:
-	kubectl delete -n registry-system -f dev.yml
-	rm -rf dev.yml
-
+	kubectl delete -f deployment.yml
+	rm -rf deployment.yml
