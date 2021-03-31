@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: clair
-        image: quay.io/coreos/clair
+        image: quay.io/coreos/clair:v2.0.9
         args:
           - "-config"
           - "/config/config.yaml"
@@ -31,4 +31,4 @@ spec:
           name: clair-config
       - name: rootca
         secret:
-          secretName: registry-operator-ca
+          secretName: registry-ca

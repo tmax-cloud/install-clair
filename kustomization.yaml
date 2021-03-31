@@ -7,11 +7,6 @@ configMapGenerator:
 - name: clair-config
   files:
   - clair-config.yml
-secretGenerator:
-- name: registry-operator-ca
-  files:
-  - ca.crt
-  - ca.key
 generatorOptions:
   disableNameSuffixHash: true
   labels:
