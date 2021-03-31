@@ -10,9 +10,13 @@
 1. 도커 이미지 파일시스템에 저장
 
     ```bash
-    SCANNER=quay.io/coreos/clair
+    SCANNER=arminc/clair-local-scan:latest
     sudo docker pull ${SCANNER}
     sudo docker save ${SCANNER} > ${SCANNER}.tar
+
+    DB=arminc/clair-db:latest
+    sudo docker pull ${DB}
+    sudo docker save ${DB} > ${DB}.tar
     ```
 
 2. 저장한 이미지 파일을 설치할 폐쇄망 환경으로 복사
@@ -21,11 +25,15 @@
 
     ```bash
     REGISTRY={REGISTRY}   # ex: REGISTRY=192.168.6.100:5000
-    SCANNER=quay.io/coreos/clair
+    SCANNER=arminc/clair-local-scan:latest
     
     sudo docker load < ${SCANNER}.tar
     sudo docker tag ${SCANNER} ${REGISTRY}/${SCANNER}
     sudo docker push ${REGISTRY}/${SCANNER}
+
+    sudo docker load < ${DB}.tar
+    sudo docker tag ${DB} ${REGISTRY}/${DB}
+    sudo docker push ${REGISTRY}/${DB}
     ```
 
 4. 아래 설치 가이드 수행
@@ -41,7 +49,7 @@
 2. 설정
 
     ```bash
-    cd install_clair
+    cd install_clair/private
     kubectl config set-context --current --namespace=<to_install_namespace>
     make deploy
     ```
