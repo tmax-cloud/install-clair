@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: arminc-postgres
+  labels:
+    app: arminc-postgres
+spec:
+  replicas: 1
+  selector:
+    app: arminc-postgres
+  template:
+    metadata:
+      labels:
+        app: arminc-postgres
+    spec:
+      containers:
+      - name: postgres
+        image: arminc/clair-db:latest
+        env:
+        - name: POSTGRES_PASSWORD
+          value: password
+        ports:
+        - name: postgres-port
+          containerPort: 5432
