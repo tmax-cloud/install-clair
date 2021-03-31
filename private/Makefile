@@ -3,7 +3,7 @@ deployment.yml:
 
 
 deploy: deployment.yml
-	kubectl create -f deployment.yml
+	kubectl apply -f deployment.yml
 
 clean:
 	kubectl delete -f deployment.yml
