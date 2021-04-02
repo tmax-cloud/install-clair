@@ -1,0 +1,33 @@
+networks:
+  default:
+    driver_opts:
+      com.docker.network.bridge.name: clair
+
+version: '3.8'
+
+services:
+  clair:
+    image: quay.io/coreos/clair:v4.0.3
+    ports:
+      - "13000:3000"
+    environment:
+    - CLAIR_MODE=combo
+    - CLAIR_CONF=/tmp/config.yaml
+    volumes:
+      - ./clair-config.yml:/tmp/config.yaml
+    depends_on:
+      - clair-db
+
+  container_name: clair-db
+    image: postgres:12.1
+    environment:
+      POSTGRES_USER: "clair"
+      POSTGRES_DB: "clair"
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U clair -d clair"]
+      interval: 10s
+      timeout: 9s
+      retries: 3
+      start_period: 10s
