@@ -40,13 +40,14 @@
     cd install_clair/operator-subsystem
     ```
 
-2.  registry-operator가 신뢰하는 인증서와 개인 키 준비
+2.  registry-operator가 신뢰하는 인증서와 개인 키 준비 (이미 설치했으면 skip)
    
     [registry-operator 설치가이드 - Step01 인증서 생성](https://github.com/tmax-cloud/install-registry-operator/tree/5.0#Step-1-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%83%9D%EC%84%B1) 수행
-    (이미 registry-operator를 설치되었으면 skip)
+   
 
 
 3. 디플로이
+
     ```bash    
     REGISTRY=${REGISTRY} make deploy
     ```
@@ -72,9 +73,9 @@
     NAMESPACE={{enter_namespace_to_deploy}} REGISTRY=${REGISTRY} make deploy
     ```
 
-## clair 삭제 가이드
+## 제거
 
-* 아래의 명령어를 clair 디렉터리에서 실행
+* 아래의 명령어를 git base 디렉터리에서 실행
 
     ```bash
     make clean
