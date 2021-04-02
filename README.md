@@ -40,10 +40,9 @@
     cd install_clair/operator-subsystem
     ```
 
-2.  registry-operator가 신뢰하는 인증서와 개인 키 준비 (이미 설치했으면 skip)
+2.  registry-operator가 신뢰하는 인증서 준비 (이미 설치했으면 skip)
    
     [registry-operator 설치가이드 - Step01 인증서 생성](https://github.com/tmax-cloud/install-registry-operator/tree/5.0#Step-1-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%83%9D%EC%84%B1) 수행
-   
 
 
 3. 디플로이
