@@ -1,10 +1,5 @@
 # install_clair
 
-## Prerequisite
-
-* [registry-operator 설치가이드 - Step01 인증서 생성](https://github.com/tmax-cloud/install-registry-operator/tree/5.0#Step-1-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%83%9D%EC%84%B1) 과정으로 생성된 인증서 및 키(ca.crt, ca.key)
-
-
 ## 폐쇄망 구축
 
 1. 도커 이미지 파일시스템에 저장
@@ -36,6 +31,28 @@
 
 ## 설치
    
+### [registry-operator](https://github.com/tmax-cloud/install-registry-operator/tree/5.0)의 서브시스템으로 설치하는 경우
+
+1. Clair 설치 git repo clone
+
+    ```bash
+    git clone https://github.com/tmax-cloud/install-clair
+    cd install_clair/operator-subsystem
+    ```
+
+2.  registry-operator가 신뢰하는 인증서와 개인 키 준비
+   
+    [registry-operator 설치가이드 - Step01 인증서 생성](https://github.com/tmax-cloud/install-registry-operator/tree/5.0#Step-1-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%83%9D%EC%84%B1) 수행
+    (이미 registry-operator를 설치되었으면 skip)
+
+
+3. 디플로이
+    ```bash    
+    REGISTRY=${REGISTRY} make deploy
+    ```
+
+### 별도로 설치하는 경우
+
 1. Clair 설치 git repo clone
 
     ```bash
@@ -44,14 +61,15 @@
     ```
 
 2. (optional) 네임스페이스 생성 - 이 step을 skip할 경우 `registry-system`에 생성
+   
     ```bash
-    kubectl create namespace {{enter_namespace_to_deploy}} # optioanl
+    kubectl create namespace {{enter_namespace_to_deploy}}
     ```
+
 3. 디플로이
+   
     ```bash    
     NAMESPACE={{enter_namespace_to_deploy}} REGISTRY=${REGISTRY} make deploy
-    # or 
-    REGISTRY=${REGISTRY} make deploy # default-namespace: registry-system
     ```
 
 ## clair 삭제 가이드

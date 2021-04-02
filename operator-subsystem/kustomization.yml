@@ -4,8 +4,17 @@ kind: Kustomization
 namespace: __NAMESPACE__
 
 bases:
-- base
+- ../base
 
+patchesStrategicMerge:
+- operator-ca-patch.yml
+
+secretGenerator:
+- name: operator-ca
+  files:
+  - ca.crt
+  - ca.key
+  
 images:
 - name: clair
   newName: __REG__/clair-local-scan:latest
