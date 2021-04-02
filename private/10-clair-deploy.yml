@@ -11,7 +11,7 @@ spec:
     spec:
       containers:
       - name: clair
-        image: arminc/clair-local-scan:latest
+        image: clair
         args:
           - "-config"
           - "/config/config.yaml"

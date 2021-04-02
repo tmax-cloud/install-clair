@@ -1,15 +1,20 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
 resources:
 - 10-clair-deploy.yml
 - 20-clair-svc.yml
 - 30-clair-db-deploy.yml
 - 40-clair-db-svc.yml
+
 configMapGenerator:
 - name: clair-config
   files:
   - clair-config.yml
+
 generatorOptions:
   disableNameSuffixHash: true
   labels:
     type: generated
   annotations:
-    note: generated
+    note: generateds

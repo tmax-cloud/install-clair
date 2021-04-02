@@ -10,30 +10,26 @@
 1. 도커 이미지 파일시스템에 저장
 
     ```bash
-    SCANNER=arminc/clair-local-scan:latest
-    sudo docker pull ${SCANNER}
-    sudo docker save ${SCANNER} > ${SCANNER}.tar
-
-    DB=arminc/clair-db:latest
-    sudo docker pull ${DB}
-    sudo docker save ${DB} > ${DB}.tar
+    sudo docker pull arminc/clair-local-scan:latest
+    sudo docker save arminc/clair-local-scan:latest > clair_img.tar
+    sudo docker pull arminc/clair-db:latest
+    sudo docker save arminc/clair-db:latest > clairdb_img.tar
     ```
 
-2. 저장한 이미지 파일을 설치할 폐쇄망 환경으로 복사
+2. 저장한 이미지 파일(*clair_img.tar, clairdb_img.tar*)을 설치할 폐쇄망 환경으로 복사
 
-3. 폐쇄망 Registry 서버에 이미지를 푸시
+3. 폐쇄망 Registry서버에 이미지를 푸시
 
     ```bash
-    REGISTRY={REGISTRY}   # ex: REGISTRY=192.168.6.100:5000
-    SCANNER=arminc/clair-local-scan:latest
+    REGISTRY={{enter_your_registry_address}}  # ex) 192.168.6.100:5000
     
-    sudo docker load < ${SCANNER}.tar
-    sudo docker tag ${SCANNER} ${REGISTRY}/${SCANNER}
-    sudo docker push ${REGISTRY}/${SCANNER}
+    sudo docker load < clair_img.tar
+    sudo docker tag arminc/clair-local-scan:latest ${REGISTRY}/clair-local-scan:latest
+    sudo docker push ${REGISTRY}/clair-local-scan:latest
 
-    sudo docker load < ${DB}.tar
-    sudo docker tag ${DB} ${REGISTRY}/${DB}
-    sudo docker push ${REGISTRY}/${DB}
+    sudo docker load < clairdb_img.tar
+    sudo docker tag arminc/clair-db:latest ${REGISTRY}/clair-db:latest
+    sudo docker push ${REGISTRY}/clair-db:latest
     ```
 
 4. 아래 설치 가이드 수행
@@ -43,15 +39,19 @@
 1. Clair 설치 git repo clone
 
     ```bash
-    git clone https://github.com/tmax-cloud/install_clair
+    git clone https://github.com/tmax-cloud/install-clair
+    cd install_clair
     ```
 
-2. 설정
-
+2. (optional) 네임스페이스 생성 - 이 step을 skip할 경우 `registry-system`에 생성
     ```bash
-    cd install_clair/private
-    kubectl config set-context --current --namespace=<to_install_namespace>
-    make deploy
+    kubectl create namespace {{enter_namespace_to_deploy}} # optioanl
+    ```
+3. 디플로이
+    ```bash    
+    NAMESPACE={{enter_namespace_to_deploy}} REGISTRY=${REGISTRY} make deploy
+    # or 
+    REGISTRY=${REGISTRY} make deploy # default-namespace: registry-system
     ```
 
 ## clair 삭제 가이드

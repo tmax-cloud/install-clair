@@ -1,10 +1,13 @@
-deployment.yml:
-	kubectl kustomize . > deployment.yml
+NAMESPACE ?= registry-system
 
+resource:
+	sed "s/__NAMESPACE__/${NAMESPACE}/g" kustomization.template > kustomization.yaml
+	sed -i "s/__REG__/${REGISTRY}/g" kustomization.yaml
+	kubectl kustomize . > resource.yml
 
-deploy: deployment.yml
-	kubectl apply -f deployment.yml
+deploy: resource
+	kubectl apply -f resource.yml
 
 clean:
-	kubectl delete -f deployment.yml
-	rm -rf deployment.yml
+	-kubectl delete -f resource.yml
+	-rm -rf kustomization.yaml resource.yml

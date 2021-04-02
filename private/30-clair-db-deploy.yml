@@ -14,8 +14,8 @@ spec:
         app: postgres
     spec:
       containers:
-      - name: postgres
-        image: arminc/clair-db:latest
+      - name: clairdb
+        image: clairdb
         env:
         - name: POSTGRES_PASSWORD
           value: password
