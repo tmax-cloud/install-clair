@@ -13,7 +13,6 @@ secretGenerator:
 - name: operator-ca
   files:
   - ca.crt
-  - ca.key
 
 images:
 - name: clair
