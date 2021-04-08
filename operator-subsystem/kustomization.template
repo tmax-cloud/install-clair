@@ -15,6 +15,9 @@ secretGenerator:
   - ca.crt
   - ca.key
 
+generatorOptions:
+  disableNameSuffixHash: true
+
 images:
 - name: clair
   newName: __REG__/clair-local-scan:latest
