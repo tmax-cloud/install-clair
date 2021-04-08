@@ -43,12 +43,14 @@
 2.  registry-operator가 신뢰하는 인증서 준비
 
     case1) [registry-operator 설치가이드](https://github.com/tmax-cloud/install-registry-operator/tree/5.0)를 설치하지 않은 경우
+    
     [registry-operator 설치가이드 - Step01 인증서 생성](https://github.com/tmax-cloud/install-registry-operator/tree/5.0#Step-1-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%83%9D%EC%84%B1) 수행을 통해 발급된 ca.crt, ca.key를 
     현재 디렉터리(install_clair/operator-subsystem)로 복사
       
     
     case2) [registry-operator 설치가이드](https://github.com/tmax-cloud/install-registry-operator/tree/5.0)를 설치한 경우
-    에 따라 이미 operator를 설치했고 해당 namespace에 registry-ca 시크릿이 이미 존재한다면, kustomization.template 파일의 secretGenerator절 삭제 후 다음 스텝 진행
+
+    operator가 설치된 namespace에 registry-ca 시크릿이 이미 존재한다면, kustomization.template 파일의 secretGenerator절 삭제 후 다음 스텝 진행
 
 
 3. 디플로이
