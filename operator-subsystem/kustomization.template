@@ -10,7 +10,7 @@ patchesStrategicMerge:
 - operator-ca-patch.yml
 
 secretGenerator:
-- name: operator-ca
+- name: registry-ca
   files:
   - ca.crt
   - ca.key
