@@ -31,7 +31,6 @@
 
 ## 설치
    
-### [registry-operator](https://github.com/tmax-cloud/install-registry-operator/tree/5.0)의 서브시스템으로 설치하는 경우
 
 1. Clair 설치 git repo clone
 
@@ -58,27 +57,6 @@
 
     ```bash    
     REGISTRY=${REGISTRY} make deploy
-    ```
-
-### 별도로 설치하는 경우
-
-1. Clair 설치 git repo clone
-
-    ```bash
-    git clone https://github.com/tmax-cloud/install-clair
-    cd install_clair
-    ```
-
-2. (optional) 네임스페이스 생성 - 이 step을 skip할 경우 `registry-system`에 생성
-   
-    ```bash
-    kubectl create namespace {{enter_namespace_to_deploy}}
-    ```
-
-3. 디플로이
-   
-    ```bash    
-    NAMESPACE={{enter_namespace_to_deploy}} REGISTRY=${REGISTRY} make deploy
     ```
 
 ## 제거
