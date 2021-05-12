@@ -30,10 +30,13 @@
 4. 아래 설치 가이드 수행
 
 ## 설치
-   
 
-1. Clair 설치 git repo clone
+1. 패키지 설치
+    ```bash
+    sudo yum install -y make
+    ```
 
+2. Clair 설치 git repo clone
     ```bash
     git clone https://github.com/tmax-cloud/install-clair
     cd install_clair/operator-subsystem
@@ -46,8 +49,13 @@
     2.1 [registry-operator 설치가이드 - Step01 인증서 생성](https://github.com/tmax-cloud/install-registry-operator/tree/5.0#Step-1-%EC%9D%B8%EC%A6%9D%EC%84%9C-%EC%83%9D%EC%84%B1) 수행
     
     2.2 위 과정을 통해 발급된 ca.crt, ca.key를 현재 디렉터리(install_clair/operator-subsystem)로 복사
-      
 
+    2.3 복사한 인증서 및 키 파일의 소유권을 사용자로 수정 (루트 사용자 권한 X)
+    ```bash
+    chown <사용자>:<사용자그룹> ca.crt ca.key
+    ```
+   
+    
     CASE 2) [registry-operator 설치가이드](https://github.com/tmax-cloud/install-registry-operator/tree/5.0)를 수행한 경우
 
     설치된 namespace에 registry-ca 시크릿이 이미 존재한다면, kustomization.template 파일의 secretGenerator절 삭제 후 다음 스텝 진행
