@@ -50,7 +50,7 @@
     
     2.2 위 과정을 통해 발급된 ca.crt, ca.key를 현재 디렉터리(install_clair/operator-subsystem)로 복사
 
-    2.3 복사한 인증서 및 키 파일의 소유권을 사용자로 수정 (루트 사용자 권한 X)
+    2.3 복사한 인증서 및 키 파일의 소유권을 현재 사용자로 수정
     ```bash
     chown <사용자>:<사용자그룹> ca.crt ca.key
     ```
