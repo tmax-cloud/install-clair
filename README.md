@@ -2,30 +2,13 @@
 
 ## 폐쇄망 구축
 
-1. 도커 이미지 파일시스템에 저장
+1. 다음 이미지 목록을 파일로 저장([참조](https://github.com/tmax-cloud/install-registry/blob/5.0/podman.md#%EC%9D%B4%EB%AF%B8%EC%A7%80-%ED%91%B8%EC%8B%9C%ED%95%98%EA%B8%B0))
+    * arminc/clair-local-scan:latest
+    * arminc/clair-db:latest
 
-    ```bash
-    sudo docker pull arminc/clair-local-scan:latest
-    sudo docker save arminc/clair-local-scan:latest > clair_img.tar
-    sudo docker pull arminc/clair-db:latest
-    sudo docker save arminc/clair-db:latest > clairdb_img.tar
-    ```
+2. 저장한 이미지 파일(*clair-local-scan.tar, clair-db.tar*)을 설치할 폐쇄망 환경으로 복사
 
-2. 저장한 이미지 파일(*clair_img.tar, clairdb_img.tar*)을 설치할 폐쇄망 환경으로 복사
-
-3. 폐쇄망 Registry서버에 이미지를 푸시
-
-    ```bash
-    REGISTRY={{enter_your_registry_address}}  # ex) 192.168.6.100:5000
-    
-    sudo docker load < clair_img.tar
-    sudo docker tag arminc/clair-local-scan:latest ${REGISTRY}/clair-local-scan:latest
-    sudo docker push ${REGISTRY}/clair-local-scan:latest
-
-    sudo docker load < clairdb_img.tar
-    sudo docker tag arminc/clair-db:latest ${REGISTRY}/clair-db:latest
-    sudo docker push ${REGISTRY}/clair-db:latest
-    ```
+3. 폐쇄망 레지스트리에 이미지 푸시([참조](https://github.com/tmax-cloud/install-registry/blob/5.0/podman.md#%EC%9D%B4%EB%AF%B8%EC%A7%80-%ED%91%B8%EC%8B%9C%ED%95%98%EA%B8%B0))
 
 4. 아래 설치 가이드 수행
 
