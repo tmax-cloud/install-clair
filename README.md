@@ -14,18 +14,20 @@
 
 ## 설치
 
-1. 패키지 설치
-    ```bash
-    sudo yum install -y make
-    ```
 
-2. Clair 설치 git repo clone
+1. Git repo 클론
     ```bash
     git clone https://github.com/tmax-cloud/install-clair
     cd install_clair/operator-subsystem
     ```
 
-2.  registry-operator가 신뢰하는 인증서 준비
+2. 패키지 설치
+    ```bash
+    sudo yum install -y make
+    sudo cp ../install_clair/resources/kustomize /usr/local/bin/
+    ```
+   
+3.  registry-operator가 신뢰하는 인증서 준비
 
     CASE 1) [registry-operator 설치가이드](https://github.com/tmax-cloud/install-registry-operator/tree/5.0)를 수행하지 않은 경우 
     
