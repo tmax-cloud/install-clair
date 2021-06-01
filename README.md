@@ -24,7 +24,7 @@
 2. 패키지 설치
     ```bash
     sudo yum install -y make
-    sudo cp ../install_clair/resources/kustomize /usr/local/bin/
+    sudo cp ../resources/kustomize /usr/local/bin/
     ```
    
 3.  registry-operator가 신뢰하는 인증서 준비
