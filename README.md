@@ -17,7 +17,7 @@
 
 1. Git repo 클론
     ```bash
-    git clone https://github.com/tmax-cloud/install-clair
+    git clone https://github.com/tmax-cloud/install-clair -b 5.0
     cd install_clair/operator-subsystem
     ```
 
