@@ -1,7 +1,6 @@
-NAMESPACE ?= registry-system
+REGISTRY ?= arminc
 
 resource:
-	sed "s/__NAMESPACE__/${NAMESPACE}/g" kustomization.template > kustomization.yaml
 	sed -i "s/__REG__/${REGISTRY}/g" kustomization.yaml
 	kubectl kustomize . > resource.yml
 
