@@ -1,7 +1,7 @@
 REGISTRY ?= arminc
 
 resource:
-	sed -i "s/__REG__/${REGISTRY}/g" kustomization.yaml
+	sed "s/__REG__/${REGISTRY}/g" kustomization.template > kustomization.yml
 	kubectl kustomize . > resource.yml
 
 deploy: resource
