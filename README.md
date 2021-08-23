@@ -43,7 +43,29 @@
        ```bash 
        make deploy
        ```
-     
+
+## 취약점 DB 업데이트
+
+1. (외부망 접속할 수 있는 환경에서) 최신 DB rule 가져오기
+
+```bash
+docker pull arminc/clair-db:latest
+docker run -d --name clair-db arminc/clair-db:latest
+
+docker exec clair-db /bin/sh -c  "pg_dump -U postgres -a -t feature -t keyvalue -t namespace -t schema_migrations -t vulnerability -t vulnerability_fixedin_feature"> vulnerability.sql  
+docker exec clair-db /bin/sh -c "pg_dump -U postgres -c -s"> clear.sql
+```
+
+2. 기존 DB 백업 후 업데이트하기
+
+```bash
+kubectl exec -n registry-system -i postgres-XXXX-XXXX -- pg_dump -U postgres -c > backup.sql
+
+kubectl exec -n registry-system -i postgres-XXXX-XXXX -- psql -U postgres < clear.sql  
+kubectl exec -n registry-system -i postgres-XXXX-XXXX -- psql -U postgres < vulnerability.sql
+```
+
+
 ## 제거
 * 아래의 명령어를 git base 디렉터리에서 실행
     ```bash
