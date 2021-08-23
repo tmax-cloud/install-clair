@@ -13,8 +13,10 @@ spec:
       - name: clair
         image: clair
         args:
-          - "-config"
+          - -conf
           - "/config/config.yaml"
+          - mode
+          - "combo"
         ports:
         - containerPort: 6060
         - containerPort: 6061
@@ -26,4 +28,3 @@ spec:
       - name: config
         configMap:
           name: clair-config
-     

@@ -6,6 +6,6 @@ bases:
 
 images:
 - name: clair
-  newName: __REG__/clair-local-scan:latest
+  newName: quay.io/coreos/clair:v4.2.2
 - name: clairdb
-  newName: __REG__/clair-db:latest
+  newName: postgres:alpine3.14

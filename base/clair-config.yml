@@ -11,70 +11,94 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+---
+introspection_addr: localhost:6061
+http_listen_addr: localhost:6060
+log_level: debug
+indexer:
+  connstring: postgres://tmax:admin@clair-db:5432/clair?sslmode=disable
+  scanlock_retry: 10
+  layer_scan_concurrency: 5
+  migrations: true
+matcher:
+  indexer_addr: "localhost:6060"
+  connstring: postgres://tmax:admin@clair-db:5432/clair?sslmode=disable
+  max_conn_pool: 100
+  run: ""
+  migrations: true
+  updater_sets:
+    - "alpine"
+    - "aws"
+    - "debian"
+    - "oracle"
+    - "photon"
+    - "pyupio"
+    - "rhel"
+    - "suse"
+    - "ubuntu"
+matchers:
+  names:
+    - "alpine"
+    - "aws"
+    - "debian"
+    - "oracle"
+    - "photon"
+    - "python"
+    - "rhel"
+    - "suse"
+    - "ubuntu"
+    - "crda"
+  config:
+#    crda:
+#      url: https://f8a-analytics-preview-2445582058137.production.gw.apicast.io/?user_key=3e42fa66f65124e6b1266a23431e3d08
+notifier:
+  indexer_addr: http://localhost:6060/
+  matcher_addr: http://localhost:6060/
+  connstring: postgres://tmax:admin@clair-db:5432/clair?sslmode=disable
+  migrations: true
+  delivery_interval: 1m
+  poll_interval: 5m
+  # if multiple delivery methods are defined the only one will be selected.
+  # preference order:
+  # webhook, amqp, stomp
+#  webhook:
+#    target: "http://webhook/"
+#    callback: "http://clair-notifier/notifier/api/v1/notifications"
+#  amqp:
+#    exchange:
+#      name: ""
+#      type: "direct"
+#      durable: true
+#      auto_delete: false
+#    uris: ["amqp://user:pass@host:10000/vhost"]
+#    direct: false
+#    routing_key: "notifications"
+#    callback: "http://clair-notifier/notifier/api/v1/notifications"
+#    tls:
+#      root_ca: "optional/path/to/rootca"
+#      cert: "madatory/path/to/cert"
+#      key: "madatory/path/to/key"
+#  stomp:
+#    desitnation: "notifications"
+#    direct: false
+#    callback: "http://clair-notifier/notifier/api/v1/notifications"
+#    login:
+#      login: "username"
+#      passcode: "passcode"
+#    tls:
+#      root_ca: "optional/path/to/rootca"
+#      cert: "madatory/path/to/cert"
+#      key: "madatory/path/to/key"
 
-# The values specified here are the default values that Clair uses if no configuration file is specified or if the keys are not defined.
-clair:
-  database:
-    # Database driver
-    type: pgsql
-    options:
-      # PostgreSQL Connection string
-      # https://www.postgresql.org/docs/current/static/libpq-connect.html#LIBPQ-CONNSTRING
-      source: postgres://postgres:password@postgres:5432/postgres?sslmode=disable
 
-      # Number of elements kept in the cache
-      # Values unlikely to change (e.g. namespaces) are cached in order to save prevent needless roundtrips to the database.
-      cachesize: 16384
 
-  api:
-    # API server port
-    port: 6060
+trace:
+#  name: "jaeger"
+#  probability: 1
+#  jaeger:
+#    agent:
+#      endpoint: "localhost:6831"
+#    service_name: "clair"
 
-    # Health server port
-    # This is an unencrypted endpoint useful for load balancers to check to healthiness of the clair server.
-    healthport: 6061
-
-    # Deadline before an API request will respond with a 503
-    timeout: 900s
-
-    # 32-bit URL-safe base64 key used to encrypt pagination tokens
-    # If one is not provided, it will be generated.
-    # Multiple clair instances in the same cluster need the same value.
-    paginationkey:
-
-    # Optional PKI configuration
-    # If you want to easily generate client certificates and CAs, try the following projects:
-    # https://github.com/coreos/etcd-ca
-    # https://github.com/cloudflare/cfssl
-    servername:
-    cafile:
-    keyfile:
-    certfile:
-
-  updater:
-    # Frequency the database will be updated with vulnerabilities from the default data sources
-    # The value 0 disables the updater entirely.
-    interval: 0
-
-  notifier:
-    # Number of attempts before the notification is marked as failed to be sent
-    attempts: 3
-
-    # Duration before a failed notification is retried
-    renotifyinterval: 2h
-
-    http:
-      # Optional endpoint that will receive notifications via POST requests
-      endpoint:
-
-      # Optional PKI configuration
-      # If you want to easily generate client certificates and CAs, try the following projects:
-      # https://github.com/cloudflare/cfssl
-      # https://github.com/coreos/etcd-ca
-      servername:
-      cafile:
-      keyfile:
-      certfile:
-
-      # Optional HTTP Proxy: must be a valid URL (including the scheme).
-      proxy:
+metrics:
+#  name: "prometheus"
